@@ -14,12 +14,12 @@ export default function Home() {
       </div>
 
       {/* Logo positioned at top */}
-      <div className="absolute top-8 left-8 z-20">
-        <div className="w-24 h-24 md:w-32 md:h-32 relative">
+      <div className="absolute top-6 left-6 z-20">
+        <div className="w-16 h-16 md:w-20 md:h-20 relative">
           <img
             src="/logo.png"
             alt="OnlyGooners Logo"
-            className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(236,72,153,0.6)] hover:drop-shadow-[0_0_30px_rgba(236,72,153,0.8)] transition-all duration-300 hover:scale-110"
+            className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] hover:drop-shadow-[0_0_25px_rgba(236,72,153,0.7)] transition-all duration-300 hover:scale-105"
           />
         </div>
       </div>

@@ -12,23 +12,19 @@ export default function Padlock({ isHovered }: PadlockProps) {
 
   const handleClick = () => {
     setIsClicked(true);
-    // Placeholder Telegram link - replace with actual link when available
     const telegramLink = "https://t.me/your_channel_placeholder";
 
-    // Smooth transition before redirect
     setTimeout(() => {
       window.open(telegramLink, "_blank", "noopener,noreferrer");
       setIsClicked(false);
-    }, 300);
+    }, 200);
   };
 
   return (
     <div className="relative">
-      {/* Tooltip */}
       {showTooltip && (
-        <div className="absolute -top-16 left-1/2 -translate-x-1/2 bg-yellow-900/90 text-yellow-100 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap backdrop-blur-sm border border-yellow-600/50 shadow-xl">
+        <div className="absolute -top-16 left-1/2 -translate-x-1/2 px-5 py-2.5 bg-black/90 backdrop-blur-sm text-yellow-400 text-sm font-semibold rounded-lg border border-yellow-600/40 shadow-xl">
           Click to Enter
-          <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-yellow-900/90 rotate-45 border-r border-b border-yellow-600/50" />
         </div>
       )}
 
@@ -36,112 +32,92 @@ export default function Padlock({ isHovered }: PadlockProps) {
         onClick={handleClick}
         onMouseEnter={() => setShowTooltip(true)}
         onMouseLeave={() => setShowTooltip(false)}
-        className={`relative cursor-pointer transition-all duration-300 transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-4 focus:ring-yellow-500/50 rounded-full ${
+        className={`relative cursor-pointer transition-all duration-700 ease-out transform ${
+          isHovered ? "scale-110" : "scale-100"
+        } ${
           isClicked ? "scale-95" : ""
-        }`}
+        } hover:drop-shadow-[0_0_30px_rgba(212,175,55,0.6)] focus:outline-none`}
         aria-label="Enter OnlyGoon"
       >
-        {/* Padlock body */}
         <svg
           width="120"
-          height="160"
-          viewBox="0 0 120 160"
-          className={`transition-all duration-300 ${
-            isHovered ? "drop-shadow-[0_0_25px_rgba(212,175,55,0.6)]" : "drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]"
-          }`}
+          height="150"
+          viewBox="0 0 120 150"
+          className="transition-all duration-700 ease-out"
         >
           <defs>
-            <linearGradient id="padlockGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{ stopColor: '#FFD700', stopOpacity: 1 }} />
-              <stop offset="50%" style={{ stopColor: '#DAA520', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: '#B8860B', stopOpacity: 1 }} />
+            <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#ffd700" />
+              <stop offset="50%" stopColor="#ffed4e" />
+              <stop offset="100%" stopColor="#d4af37" />
             </linearGradient>
-            <linearGradient id="shackleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style={{ stopColor: '#C0C0C0', stopOpacity: 1 }} />
-              <stop offset="50%" style={{ stopColor: '#A0A0A0', stopOpacity: 1 }} />
-              <stop offset="100%" style={{ stopColor: '#C0C0C0', stopOpacity: 1 }} />
+
+            <linearGradient id="metal" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#e0e0e0" />
+              <stop offset="50%" stopColor="#b0b0b0" />
+              <stop offset="100%" stopColor="#909090" />
             </linearGradient>
-            <filter id="padlockShadow">
-              <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#000000" floodOpacity="0.7"/>
+
+            <filter id="shadow">
+              <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#000000" floodOpacity="0.7"/>
             </filter>
           </defs>
 
           {/* Shackle */}
-          <path
-            d="M 40 60 L 40 30 Q 40 15 60 15 Q 80 15 80 30 L 80 60"
-            stroke="url(#shackleGradient)"
-            strokeWidth="12"
-            fill="none"
-            strokeLinecap="round"
-            filter="url(#padlockShadow)"
-          />
+          <g filter="url(#shadow)">
+            <path
+              d="M 40 65 L 40 35 Q 40 20 60 20 Q 80 20 80 35 L 80 65"
+              stroke="url(#metal)"
+              strokeWidth="14"
+              fill="none"
+              strokeLinecap="round"
+            />
+            <path
+              d="M 44 65 L 44 37 Q 44 24 60 24 Q 76 24 76 37 L 76 65"
+              stroke="#606060"
+              strokeWidth="6"
+              fill="none"
+              strokeLinecap="round"
+              opacity="0.6"
+            />
+          </g>
 
-          {/* Inner shackle detail */}
-          <path
-            d="M 45 60 L 45 32 Q 45 20 60 20 Q 75 20 75 32 L 75 60"
-            stroke="#808080"
-            strokeWidth="4"
-            fill="none"
-            strokeLinecap="round"
-            opacity="0.6"
-          />
+          {/* Body */}
+          <g filter="url(#shadow)">
+            <rect
+              x="28"
+              y="65"
+              width="64"
+              height="75"
+              rx="10"
+              fill="url(#gold)"
+              stroke="#b8860b"
+              strokeWidth="2"
+            />
 
-          {/* Main body */}
-          <rect
-            x="25"
-            y="60"
-            width="70"
-            height="90"
-            rx="8"
-            fill="url(#padlockGradient)"
-            filter="url(#padlockShadow)"
-            stroke="#B8860B"
-            strokeWidth="2"
-          />
+            {/* Highlight */}
+            <rect
+              x="32"
+              y="69"
+              width="18"
+              height="50"
+              rx="5"
+              fill="white"
+              opacity="0.25"
+            />
 
-          {/* Body highlight */}
-          <rect
-            x="30"
-            y="65"
-            width="20"
-            height="60"
-            rx="4"
-            fill="white"
-            opacity="0.15"
-          />
+            {/* Keyhole */}
+            <circle cx="60" cy="95" r="8" fill="#000000" opacity="0.9" />
+            <rect x="56" y="95" width="8" height="22" rx="2" fill="#000000" opacity="0.9" />
 
-          {/* Keyhole */}
-          <circle
-            cx="60"
-            cy="95"
-            r="8"
-            fill="#1a1a1a"
-          />
-          <rect
-            x="56"
-            y="95"
-            width="8"
-            height="25"
-            rx="2"
-            fill="#1a1a1a"
-          />
-
-          {/* Keyhole highlight */}
-          <circle
-            cx="58"
-            cy="93"
-            r="2"
-            fill="white"
-            opacity="0.3"
-          />
+            {/* Keyhole shine */}
+            <circle cx="58" cy="93" r="2" fill="white" opacity="0.4" />
+          </g>
         </svg>
 
-        {/* Animated glow ring */}
-        <div className={`absolute inset-0 rounded-full transition-opacity duration-300 ${
-          isHovered ? "opacity-100" : "opacity-0"
-        }`}>
-          <div className="absolute inset-0 rounded-full bg-yellow-500/20 blur-xl animate-pulse-slow" />
-        </div>
+        {isHovered && (
+          <div className="absolute inset-0 rounded-full bg-yellow-500/20 blur-2xl animate-pulse-slow -z-10" />
+        )}
       </button>
     </div>
   );
