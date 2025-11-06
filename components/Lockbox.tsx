@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Padlock from "./Padlock";
+import Chain from "./Chain";
 
 export default function Lockbox() {
   const [isHovered, setIsHovered] = useState(false);
@@ -14,124 +15,11 @@ export default function Lockbox() {
         <div className="absolute inset-0 border border-yellow-600/20 rounded-lg m-4" />
       </div>
 
-      {/* Chain from top-left to center */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <defs>
-          <linearGradient id="chainGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style={{ stopColor: '#c0c0c0', stopOpacity: 0.8 }} />
-            <stop offset="50%" style={{ stopColor: '#a0a0a0', stopOpacity: 0.9 }} />
-            <stop offset="100%" style={{ stopColor: '#808080', stopOpacity: 0.8 }} />
-          </linearGradient>
-          <filter id="chainShadow">
-            <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#000000" floodOpacity="0.6"/>
-          </filter>
-        </defs>
-        <path
-          d="M 0 0 Q 25 25 50 50"
-          stroke="url(#chainGradient1)"
-          strokeWidth={isHovered ? "1.2" : "0.8"}
-          fill="none"
-          strokeLinecap="round"
-          filter="url(#chainShadow)"
-          className="transition-all duration-300"
-        />
-        {/* Chain links decoration */}
-        {[0, 20, 40].map((offset) => (
-          <circle
-            key={`tl-${offset}`}
-            cx={offset * 0.5}
-            cy={offset * 0.5}
-            r="1.5"
-            fill="#a0a0a0"
-            opacity="0.6"
-          />
-        ))}
-      </svg>
-
-      {/* Chain from top-right to center */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M 100 0 Q 75 25 50 50"
-          stroke="url(#chainGradient1)"
-          strokeWidth={isHovered ? "1.2" : "0.8"}
-          fill="none"
-          strokeLinecap="round"
-          filter="url(#chainShadow)"
-          className="transition-all duration-300"
-        />
-        {[0, 20, 40].map((offset) => (
-          <circle
-            key={`tr-${offset}`}
-            cx={100 - offset * 0.5}
-            cy={offset * 0.5}
-            r="1.5"
-            fill="#a0a0a0"
-            opacity="0.6"
-          />
-        ))}
-      </svg>
-
-      {/* Chain from bottom-left to center */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M 0 100 Q 25 75 50 50"
-          stroke="url(#chainGradient1)"
-          strokeWidth={isHovered ? "1.2" : "0.8"}
-          fill="none"
-          strokeLinecap="round"
-          filter="url(#chainShadow)"
-          className="transition-all duration-300"
-        />
-        {[0, 20, 40].map((offset) => (
-          <circle
-            key={`bl-${offset}`}
-            cx={offset * 0.5}
-            cy={100 - offset * 0.5}
-            r="1.5"
-            fill="#a0a0a0"
-            opacity="0.6"
-          />
-        ))}
-      </svg>
-
-      {/* Chain from bottom-right to center */}
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M 100 100 Q 75 75 50 50"
-          stroke="url(#chainGradient1)"
-          strokeWidth={isHovered ? "1.2" : "0.8"}
-          fill="none"
-          strokeLinecap="round"
-          filter="url(#chainShadow)"
-          className="transition-all duration-300"
-        />
-        {[0, 20, 40].map((offset) => (
-          <circle
-            key={`br-${offset}`}
-            cx={100 - offset * 0.5}
-            cy={100 - offset * 0.5}
-            r="1.5"
-            fill="#a0a0a0"
-            opacity="0.6"
-          />
-        ))}
-      </svg>
+      {/* Chains - from corners to center */}
+      <Chain startX={0} startY={0} endX={50} endY={50} isHovered={isHovered} />
+      <Chain startX={100} startY={0} endX={50} endY={50} isHovered={isHovered} />
+      <Chain startX={0} startY={100} endX={50} endY={50} isHovered={isHovered} />
+      <Chain startX={100} startY={100} endX={50} endY={50} isHovered={isHovered} />
 
       {/* Central Padlock */}
       <div

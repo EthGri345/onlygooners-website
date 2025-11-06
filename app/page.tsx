@@ -13,8 +13,19 @@ export default function Home() {
         <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-yellow-800/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1.5s' }} />
       </div>
 
-      {/* Ticker positioned at top */}
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 z-20">
+      {/* Logo positioned at top */}
+      <div className="absolute top-8 left-8 z-20">
+        <div className="w-24 h-24 md:w-32 md:h-32 relative">
+          <img
+            src="/logo.png"
+            alt="OnlyGooners Logo"
+            className="w-full h-full object-contain drop-shadow-[0_0_20px_rgba(236,72,153,0.6)] hover:drop-shadow-[0_0_30px_rgba(236,72,153,0.8)] transition-all duration-300 hover:scale-110"
+          />
+        </div>
+      </div>
+
+      {/* Ticker positioned at top right */}
+      <div className="absolute top-8 right-8 z-20">
         <Ticker />
       </div>
 
@@ -23,8 +34,8 @@ export default function Home() {
         <Lockbox />
       </div>
 
-      {/* Contact Address positioned at bottom */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
+      {/* Contact Address positioned at bottom left */}
+      <div className="absolute bottom-8 left-8 z-20">
         <ContactAddress />
       </div>
 
